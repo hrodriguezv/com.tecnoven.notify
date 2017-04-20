@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="XDoclet Generator" default="_xdoclet_generation_">
+	<property name="eclipse.home" value="/opt/eclipse"/>
+	<!-- base directory for compilation targets -->
+	<property name="build.home" value="${basedir}" />
+
+	<!-- The base directory for all libraries (jar) files -->
+	<property name="lib.home" value="${build.home}/lib" />
+	<property name="xdoclet.basedir" value="xdoclet"/>
+	<path id="project.classpath">
+		<pathelement location="bin"/>
+		<pathelement location="lib"/>
+	</path>
+	<path id="class.path">
+		<fileset dir="${lib.home}" includes="**/*.jar" />
+	</path>
+	<path id="xdoclet.classpath">
+		<path refid="project.classpath"/>
+		<path refid="class.path"/>
+		<fileset dir="${xdoclet.basedir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${xdoclet.basedir}">
+			<include name="xdoclet-*.jar"/>
+		</fileset>
+	</path>
+	<target name="_xdoclet_generation_">
+		<taskdef name="hibernatedoclet" classname="xdoclet.modules.hibernate.HibernateDocletTask" 
+			classpathref="xdoclet.classpath"/>
+		<hibernatedoclet excludedTags="@version,@author,@todo,@see"  destDir="hibernate"  mergeDir="xdoclet-merge"  verbose="" >
+			<fileset dir="src"  includes="**/*.java" >
+			</fileset>
+			<hibernate Version="3.0"  templateFile="hibernate.xdt" >
+			</hibernate>
+		</hibernatedoclet>
+	</target>
+</project>
