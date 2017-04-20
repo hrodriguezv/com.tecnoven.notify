@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+>
+
+    <class
+        name="com.tecnoven.notify.domain.TemplateDefinitionData"
+        table="template_def"
+        lazy="false"
+    >
+
+        <id
+            name="templateDefId"
+            column="id_template_def"
+            type="long"
+        >
+            <generator class="sequence">
+                <param name="sequence">s_template_def</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-TemplateDefinitionData.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="customCode"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="custom_code"
+            length="20"
+            not-null="false"
+        />
+
+        <property
+            name="description"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="description"
+            length="500000"
+            not-null="true"
+        />
+
+        <property
+            name="name"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="name"
+            not-null="true"
+        />
+
+        <set
+            name="tags"
+            lazy="false"
+            inverse="true"
+            cascade="none"
+            sort="unsorted"
+        >
+
+            <key
+                column="id_template_def"
+                  foreign-key="template_fk1_tag"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.tecnoven.notify.domain.TagData"
+            />
+
+        </set>
+
+        <property
+            name="tagsHasPk"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="tags_with_pk"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-TemplateDefinitionData.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

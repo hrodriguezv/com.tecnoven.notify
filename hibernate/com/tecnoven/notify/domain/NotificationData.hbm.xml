@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+>
+
+    <class
+        name="com.tecnoven.notify.domain.NotificationData"
+        table="notification"
+        lazy="false"
+    >
+
+        <id
+            name="notificationId"
+            column="id_notification"
+            type="long"
+        >
+            <generator class="sequence">
+                <param name="sequence">s_notification</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-NotificationData.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="type"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="type"
+            not-null="true"
+        />
+
+        <property
+            name="created"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="created"
+            not-null="true"
+        />
+
+        <property
+            name="numberNotification"
+            type="int"
+            update="true"
+            insert="true"
+            column="notification_number"
+            not-null="true"
+        />
+
+        <property
+            name="numberSent"
+            type="int"
+            update="true"
+            insert="true"
+            column="sent_number"
+            not-null="true"
+        />
+
+        <set
+            name="records"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+            sort="unsorted"
+        >
+
+            <key
+                column="id_notification"
+                  foreign-key="notification_fk1_record"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.tecnoven.notify.domain.RecordData"
+            />
+
+        </set>
+
+        <many-to-one
+            name="template"
+            class="com.tecnoven.notify.domain.TemplateData"
+            cascade="none"
+            outer-join="true"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="id_template" 
+            />
+        </many-to-one>
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-NotificationData.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

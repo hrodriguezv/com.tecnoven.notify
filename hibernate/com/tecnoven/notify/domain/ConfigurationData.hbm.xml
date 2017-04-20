@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+>
+
+    <class
+        name="com.tecnoven.notify.domain.ConfigurationData"
+        table="configuration"
+        lazy="false"
+    >
+
+        <id
+            name="configurationId"
+            column="id_configuration"
+            type="long"
+        >
+            <generator class="sequence">
+                <param name="sequence">s_configuration</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-ConfigurationData.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="current"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="current"
+        />
+
+        <property
+            name="mailSender"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="mail_sender"
+            length="100"
+        />
+
+        <property
+            name="serverName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="server_name"
+            length="100"
+        />
+
+        <property
+            name="serverPort"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="server_port"
+            length="5"
+        />
+
+        <property
+            name="titleSender"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="title_sender"
+            length="100"
+        />
+
+        <property
+            name="password"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="password"
+            length="200"
+        />
+
+        <property
+            name="configName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="config_name"
+            length="200"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-ConfigurationData.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

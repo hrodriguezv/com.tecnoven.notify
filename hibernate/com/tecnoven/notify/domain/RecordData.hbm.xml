@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+>
+
+    <class
+        name="com.tecnoven.notify.domain.RecordData"
+        table="record"
+        lazy="false"
+    >
+
+        <id
+            name="recordId"
+            column="id_record"
+            type="long"
+        >
+            <generator class="sequence">
+                <param name="sequence">s_record</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-RecordData.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <many-to-one
+            name="notification"
+            class="com.tecnoven.notify.domain.NotificationData"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            foreign-key="notification_fk1_record"
+            column="id_notification"
+        />
+
+        <property
+            name="PKValue"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="pk"
+            not-null="false"
+        />
+
+        <many-to-one
+            name="tag"
+            class="com.tecnoven.notify.domain.TagData"
+            cascade="none"
+            outer-join="true"
+            update="true"
+            insert="true"
+        >
+            <column
+                name="id_tag" 
+            />
+        </many-to-one>
+
+        <property
+            name="value"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="value"
+            not-null="false"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-RecordData.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>
