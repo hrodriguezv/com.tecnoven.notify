@@ -53,8 +53,8 @@
 	</target>
 
 	<path id="project.classpath">
-		<fileset dir="/opt/jboss/server/ems/lib" includes="*.jar" />
-		<fileset dir="/opt/jboss/lib" includes="*.jar" />
+		<fileset dir="${lib.home}" includes="*.jar" />
+		<fileset dir="${build.home}/xdoclet" includes="*.jar" />
 		<pathelement location="bin"/>
 	</path>
 

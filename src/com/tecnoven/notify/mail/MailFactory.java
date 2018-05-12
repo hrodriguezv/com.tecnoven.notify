@@ -43,7 +43,7 @@ public class MailFactory {
 	/**
 	 * 
 	 */
-	private Session session;
+	protected Session session;
 
 	/**
 	 * 
@@ -60,6 +60,16 @@ public class MailFactory {
 	 */
 	private String subject;
 
+	/**
+	 * 
+	 */
+	protected SMTPAuthentication auth;
+	
+	/**
+	 * 
+	 */
+	protected Properties prop;
+	
 	/**
 	 * 
 	 * @param config
@@ -82,18 +92,17 @@ public class MailFactory {
 		from = config.getMailSender();
 		title = config.getTitleSender();
 
-		Properties prop = new Properties();
+		prop = new Properties();
 		prop.put("mail.smtp.host", config.getServerName());
 		prop.put("mail.smtp.port", config.getServerPort());
-
 		// gmail
 		prop.put("mail.smtp.starttls.enable", "true");
-
 		prop.put("mail.smtp.auth", "true");
+		
 		try {
 			CryptoLibrary localEncrypter = new CryptoLibrary();
 			String plainPassword = localEncrypter.decrypt(config.getPassword());
-			SMTPAuthentication auth = new SMTPAuthentication(config
+			this.auth = new SMTPAuthentication(config
 					.getMailSender(), plainPassword);
 			this.session = Session.getInstance(prop, auth);
 			this.session.setDebug(true);
